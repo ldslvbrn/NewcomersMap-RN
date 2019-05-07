@@ -1,0 +1,9 @@
+{
+    "color": {
+        "light": "#05a5d1",
+        "dark": "#037d9f",
+        "accent": "#007a66",
+        "backgroundColor": "#e6f5fd",
+        "textColor": "#333333"
+    }
+}
