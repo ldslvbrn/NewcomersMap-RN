@@ -54,7 +54,6 @@ export default class FirebaseProvider {
     async updateUserMap(map, callback) {
         const documentId = map.documentId;
         delete map.documentId;
-        console.log(map);
         await this._db.collection(_usersDbCollection)
             .doc(this._user.user.uid)
             .collection(_userMapsDbCollection)
@@ -65,7 +64,6 @@ export default class FirebaseProvider {
     }
 
     async addUserMap(map, callback) {
-        console.log(map);
         map.location = map.markers[0].location;
         await this._db.collection(_usersDbCollection)
             .doc(this._user.user.uid)

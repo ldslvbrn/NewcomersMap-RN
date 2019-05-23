@@ -4,9 +4,10 @@ import { StackActions, NavigationActions } from 'react-navigation';
 import * as theme from '../assets/themes/default.json';
 
 export default class Error extends Component {
-    constructor() {
-        super();
-        this.state = { message: this.props.navigation.getParam }
+    constructor(props) {
+        super(props);
+        const errorCode= this.props.navigation.getParam('errorCode', '' );
+        this.state = { message: errorMessages[errorCode] };
     }
 
     render() {
@@ -14,7 +15,7 @@ export default class Error extends Component {
             <View style={styles.container}>
                 <Text style={styles.title}>Error!</Text>
                 <Text style={styles.text}>
-                    {this.state.message.toString()}
+                    {this.state.message}
                 </Text>
             </View>
         );
@@ -25,7 +26,7 @@ export const showError = (text) => {
     this.props.navigation.dispatch(StackActions.reset({
         index: 0,
         actions: [NavigationActions.navigate({
-            routeName: 'MapListScreen',
+            routeName: 'ErrorScreen',
             params: { message: text }
         })],
     }));
@@ -33,16 +34,18 @@ export const showError = (text) => {
 
 const styles = StyleSheet.create({
     container: {
-        height: "60%",
+        flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: theme.color.backgroundColor,
+        paddingRight: 35,
+        paddingLeft: 35,
     },
     title: {
         fontSize: 20,
         textAlign: 'center',
         color: theme.color.text,
-        margin: 30,
+        margin: 20,
     },
     text: {
         textAlign: 'center',
@@ -50,3 +53,9 @@ const styles = StyleSheet.create({
         marginBottom: 5,
     },
 });
+
+const errorMessages = {
+    permissionError: "Location permission is required\n\n" +
+        " In order to use the application, we need your location access permission" +
+        "Navigate to the phone settings, allow the location permission and restart the app"
+};

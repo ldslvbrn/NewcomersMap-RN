@@ -1,25 +1,36 @@
 import React, { PureComponent } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, } from 'react-native';
 import * as theme from '../assets/themes/default.json';
+import {
+    Menu,
+    MenuOptions,
+    MenuOption,
+    MenuTrigger,
+} from 'react-native-popup-menu';
 
 export default class MarkerListItem extends PureComponent {
     constructor(props) {
         super(props);
         this._onPress = this._onPress.bind(this);
+        this._onLongPress = this._onLongPress.bind(this);
     }
 
     render() {
         return (
-            <TouchableOpacity onPress={this._onPress}>
-                <View style={styles.container}>
-                <Text style={styles.title}>{this.props.title}</Text>
-                <Text style={styles.location}>{this.props.location}</Text>
-            </View>
+            <TouchableOpacity onPress={this._onPress} onLongPress={this._onLongPress}>
+                <View>
+                    <View style={styles.container}>
+                        <Text style={styles.title}>{this.props.title}</Text>
+                        <Text style={styles.location}>{this.props.location}</Text>
+                    </View>
+                </View>
             </TouchableOpacity>
         );
     }
 
-    _onPress() { this.props.onPress(this.props.title); }
+    _onPress = () => this.props.onPress(this.props.title);
+
+    _onLongPress = () => this.props.onLongPress(this.props.title);
 }
 
 const styles = StyleSheet.create({

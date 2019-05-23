@@ -7,31 +7,37 @@ import {
     FlatList,
     ToastAndroid,
     ActivityIndicator,
-    TouchableOpacity
+    TouchableOpacity,
+    BackHandler,
+    Alert
 } from "react-native";
 import MapView, { Marker } from 'react-native-maps';
-// import { MapView , Marker } from 'react-native-maps';
+import { HeaderBackButton } from 'react-navigation';
 import * as theme from '../assets/themes/default.json';
 import MarkerListItem from "./MarkerListItem.js";
 import * as Geocoder from "../GeocoderProvider";
 import DialogInput from "react-native-dialog-input";
+import { StackActions, NavigationActions } from 'react-navigation';
 
 export default class MapDisplay extends React.Component {
     static navigationOptions = ({ navigation }) => {
-        const userMap = navigation.getParam('userMap', null);
-        const headerTitle = userMap ? userMap.title : "New Map";
         return {
-            title: navigation.getParam('headerTitle', headerTitle),
-            headerRight: (<SaveButton
-                onPress={navigation.getParam('save')}
-            />
+            title: navigation.getParam('title', ""),
+            headerRight: (
+                <HeaderButtons
+                    onSavePress={navigation.getParam('save')}
+                    onMorePress={navigation.getParam('more')}
+                />
+            ),
+            headerLeft: (<HeaderBackButton
+                tintColor='#fff'
+                onPress={navigation.getParam('back')} />
             ),
         };
     };
 
     constructor(props) {
         super(props);
-
         // no need for wrapping bindings, only improves readability
         this.bindFunctions = (classContext) => {
             this._getUserPosition = this._getUserPosition.bind(classContext);
@@ -44,18 +50,22 @@ export default class MapDisplay extends React.Component {
             this._submitInputMarkerName = this._submitInputMarkerName.bind(classContext);
             this._onMapLongPress = this._onMapLongPress.bind(classContext);
             this._onPressMarker = this._onPressMarker.bind(classContext);
+            this._onBackPressed = this._onBackPressed.bind(classContext);
             this.saveUserMap = this.saveUserMap.bind(classContext);
+            this._showMenu = this._showMenu.bind(classContext);
+            this._onLongPressItem = this._onLongPressItem.bind(classContext);
         }
         this.bindFunctions(this);
-
         // private vars
         this._ongoingMarkerNameChange = null;
         this._mapViewRef = null;
         this._flatListRef = null;
         this._markerRefs = new Map();
-
+        this._firebaseProvider = this.props.navigation.getParam('firebaseProv', null);
         // get arguments set-up initial state
         let userMap = this.props.navigation.getParam('userMap', null);
+        const headerTitle = userMap ? userMap.title : "New Map";
+        this.props.navigation.setParams({ title: headerTitle });
         let shouldPopUp;
         if (userMap === null || undefined) {
             userMap = {
@@ -65,9 +75,8 @@ export default class MapDisplay extends React.Component {
                 markers: []
             }
             shouldPopUp = true
-        } else shouldPopUp = false
+        } else shouldPopUp = false;
         this.state = {
-            firebase: this.props.navigation.getParam('firebaseProv', null),
             shouldMapNameDialog: shouldPopUp,
             shouldMarkerNameDialog: false,
             userMap: userMap,
@@ -77,17 +86,13 @@ export default class MapDisplay extends React.Component {
         }
     }
 
-    /*
-     * add onLongPress callback (MapView)
-     * add onPress callback on the pins
-     * add onPress callback on the list items
-     * 
-     * after you are done, implement on click listeners and
-     * onBackPress/onNavigateBack dialogs
-     */
-
     componentDidMount() {
-        this.props.navigation.setParams({ save: this.saveUserMap })
+        this.props.navigation.setParams({
+            save: this.saveUserMap,
+            more: this._showMenu,
+            back: this._onBackPressed
+        });
+        BackHandler.addEventListener('hardwareBackPress', this._onBackPressed);
         const watchId = navigator.geolocation.watchPosition(
             ((pos) => this._getUserPosition(pos, watchId)),
             ((err) => this._positionFetchError(err)),
@@ -103,6 +108,7 @@ export default class MapDisplay extends React.Component {
 
     componentWillUnmount() {
         navigator.geolocation.clearWatch(this.state.watchId);
+        BackHandler.removeEventListener('hardwareBackPress', this._onBackPressed);
     }
 
     render() {
@@ -197,7 +203,6 @@ export default class MapDisplay extends React.Component {
                 style={styles.map}
                 onLongPress={this._onMapLongPress}
                 showsUserLocation={true}
-                showsMyLocationButton={true}
                 camera={camera}
             >
                 {this.state.userMap.markers.map(marker => (
@@ -218,10 +223,11 @@ export default class MapDisplay extends React.Component {
     }
 
     _submitInputMapName(input) {
-        const usrM = this.state.userMap
+        const userMap = this.state.userMap
         usrM.title = input;
         this.setState({
-            userMap: usrM,
+            userMap: userMap,
+            shouldSave: true,
             shouldMapNameDialog: false
         })
         this.props.navigation.setParams({ headerTitle: usrM.title });
@@ -235,6 +241,7 @@ export default class MapDisplay extends React.Component {
             userMap.markers[userMap.markers.indexOf(marker)].title = input;
             this.setState({
                 userMap: userMap,
+                shouldSave: true,
                 shouldMarkerNameDialog: false
             }, () => this._ongoingMarkerNameChange = null);
         } else { //  or is new marker being added?
@@ -251,6 +258,7 @@ export default class MapDisplay extends React.Component {
                 this.setState({
                     shownLocations: shownLocations,
                     userMap: userMap,
+                    shouldSave: true,
                     shouldMarkerNameDialog: false
                 }, () => this._ongoingMarkerNameChange = null);
             });
@@ -264,6 +272,7 @@ export default class MapDisplay extends React.Component {
                 title={item.title}
                 location={this.state.shownLocations[markerIndex]}
                 onPress={this._onPressItem}
+                onLongPress={this._onLongPressItem}
             />
         );
     }
@@ -285,23 +294,29 @@ export default class MapDisplay extends React.Component {
     }
 
     saveUserMap() {
-        const userMap = this.state.userMap;
         const succesMessage = () => {
             ToastAndroid.show("Map saved successfully!", ToastAndroid.SHORT)
         };
         const errorMessage = () => {
             ToastAndroid.show("Oops, something went wrong!", ToastAndroid.SHORT)
-        }
+        };
+        const userMap = this.state.userMap;
         if (userMap.documentId) {
-            this.state.firebase.updateUserMap(userMap, (isSucces) => {
-                if (isSucces) succesMessage();
+            this._firebaseProvider.updateUserMap(userMap, (isSucces) => {
+                if (isSucces) {
+                    this.setState({ shouldSave: false })
+                    succesMessage();
+                }
                 else errorMessage();
             });
         } else {
-            this.state.firebase.addUserMap(userMap, (docId) => {
+            this._firebaseProvider.addUserMap(userMap, (docId) => {
                 if (docId) {
                     userMap.documentId = docId;
-                    this.setState({ userMap: userMap });
+                    this.setState({
+                        userMap: userMap,
+                        shouldSave: false
+                    });
                     succesMessage();
                 } else errorMessage();
             });
@@ -341,9 +356,13 @@ export default class MapDisplay extends React.Component {
         this._markerRefs.get(marker).showCallout();
     }
 
+    _onLongPressItem(title) {
+        // TODO
+    }
+
     _onMapLongPress(event) {
         const coords = event.nativeEvent.coordinate;
-        const geoPoint = this.state.firebase.getGeoPoint(coords.latitude, coords.longitude);
+        const geoPoint = this._firebaseProvider.getGeoPoint(coords.latitude, coords.longitude);
         const newMarker = {
             title: "New Marker" + this.state.userMap.markers.length,
             description: null,
@@ -351,6 +370,41 @@ export default class MapDisplay extends React.Component {
         };
         this._ongoingMarkerNameChange = newMarker;
         this.setState({ shouldMarkerNameDialog: true });
+    }
+
+    _showMenu = () => console.log("Menu pressed!")
+
+    _onBackPressed() {
+        console.log("_onBackPressed pressed!");
+        if (this.state.shouldSave) {
+            Alert.alert(
+                'Unsaved Changes',
+                'Would you like to save your changes?', [
+                    {
+                        text: "Cancel",
+                        style: 'cancel'
+                    }, {
+                        text: "No",
+                        onPress: () => {
+                            this.props.navigation.state.params.onNavigateBack();
+                            this.props.navigation.goBack()
+                        },
+                        style: 'cancel',
+                    }, {
+                        text: "Yes",
+                        onPress: () => {
+                            this.saveUserMap();
+                            this.props.navigation.state.params.onNavigateBack();
+                            this.props.navigation.goBack();
+                        }
+                    },],
+                { cancelable: false },
+            );
+
+        } else {
+            this.props.navigation.goBack();
+            return true;
+        }
     }
 }
 
@@ -369,6 +423,52 @@ class SaveButton extends React.Component {
     }
 }
 
+class MoreButton extends React.Component {
+    render() {
+        return (
+            <TouchableOpacity onPress={this.props.onPress}>
+                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                    <Image
+                        style={styles.saveImage}
+                        source={require('../assets/images/more_vert_white_48dp.png')}
+                    />
+                </View>
+            </TouchableOpacity>
+        );
+    }
+}
+
+class HeaderButtons extends React.Component {
+    constructor() {
+        super();
+        this._onSavePress = this._onSavePress.bind(this);
+        this._onMorePress = this._onMorePress.bind(this);
+    }
+
+    render() {
+        return (
+            <View style={styles.header}>
+                <TouchableOpacity onPress={this._onSavePress}>
+                    <Image
+                        style={styles.headerButtons}
+                        source={require('../assets/images/save_white_48.png')}
+                    />
+                </TouchableOpacity>
+                <TouchableOpacity onPress={this._onMorePress}>
+                    <Image
+                        style={styles.headerButtons}
+                        source={require('../assets/images/more_vert_white_48dp.png')}
+                    />
+                </TouchableOpacity>
+            </View>
+        );
+    }
+
+    _onSavePress = () => this.props.onSavePress();
+
+    _onMorePress = () => this.props.onMorePress();
+}
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -376,14 +476,14 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     mapContainer: {
-        height: '55%',
+        height: '65%',
         width: '100%',
         alignItems: 'center',
         justifyContent: 'center',
     },
     listContainer: {
         paddingTop: 5,
-        height: '45%',
+        height: '35%',
         width: '100%',
         justifyContent: 'center',
         alignItems: 'center',
@@ -398,6 +498,20 @@ const styles = StyleSheet.create({
         margin: 20,
         height: '5%',
         width: '5%',
+    },
+    headerButtons: {
+        padding: 10,
+        margin: 4,
+        marginLeft: 10,
+        marginRight: 10,
+        height: '45%',
+        width: '45%',
+    },
+    header: {
+        flexDirection: 'row',
+        marginRight: 12,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 });
 

@@ -19,11 +19,12 @@ export default class MapList extends Component {
         this._addItem = this._addItem.bind(this);
         this._renderListConditionaly = this._renderListConditionaly.bind(this);
         this._onPressItem = this._onPressItem.bind(this);
+        this._onNavigateBack = this._onNavigateBack.bind(this);
+        this._getAllMaps = this._getAllMaps.bind(this);
         this._dbProvider = null;
         this.state = {
             user: this.props.navigation.getParam('user', null),
             dataReady: false,
-            firebase: null,
             userMaps: null,
             shownLocation: []
         };
@@ -32,22 +33,7 @@ export default class MapList extends Component {
     componentDidMount() {
         this._dbProvider = new FirebaseProvider();
         this._dbProvider.authenticate(
-            this.state.user.idToken, () => {
-                this._dbProvider.getAllMaps()
-                    .then((maps) => {
-                        let coords = maps.map((map) => {
-                            return [map.location.latitude, map.location.longitude];
-                        });
-                        Geocoder.getRegionFromLocation(coords, (places) => {
-                            this.setState({
-                                dataReady: true,
-                                firebase: this._dbProvider,
-                                userMaps: maps,
-                                shownLocation: places
-                            });
-                        });
-                    });
-            });
+            this.state.user.idToken, this._getAllMaps);
     }
 
     render() {
@@ -103,17 +89,38 @@ export default class MapList extends Component {
     _onPressItem(id) {
         const mapItem = this.state.userMaps
             .find((userMap) => userMap.documentId === id);
-        // console.log(mapItem.location.latitude);
-        this.props.navigation.navigate('MapScreen', { 
+        this.props.navigation.navigate('MapScreen', {
             userMap: mapItem,
-            firebaseProv: this.state.firebase
+            firebaseProv: this._dbProvider,
+            onNavigateBack: () => this._onNavigateBack(),
         });
     }
 
     _addItem() {
-        this.props.navigation.navigate('MapScreen', { 
-            firebaseProv: this.state.firebase
+        this.props.navigation.navigate('MapScreen', {
+            firebaseProv: this._dbProvider,
+            onNavigateBack: () => this._onNavigateBack(),
         });
+    }
+
+    _onNavigateBack() {
+        this._getAllMaps()
+    }
+
+    _getAllMaps() {
+        this._dbProvider.getAllMaps()
+            .then((maps) => {
+                let coords = maps.map((map) => {
+                    return [map.location.latitude, map.location.longitude];
+                });
+                Geocoder.getRegionFromLocation(coords, (places) => {
+                    this.setState({
+                        dataReady: true,
+                        userMaps: maps,
+                        shownLocation: places
+                    });
+                });
+            });
     }
 }
 

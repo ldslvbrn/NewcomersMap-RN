@@ -10,8 +10,8 @@ MERGED from [:react-native-maps] /home/kral_chleba/Desktop/NewcomersMap-RN/node_
 MERGED from [:react-native-gesture-handler] /home/kral_chleba/Desktop/NewcomersMap-RN/node_modules/react-native-gesture-handler/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
 MERGED from [com.facebook.react:react-native:0.59.5] /home/kral_chleba/.gradle/caches/transforms-1/files-1.1/react-native-0.59.5.aar/0e32a780373ecfa7eea36b4754cce6d1/AndroidManifest.xml:2:1-13:12
 MERGED from [com.android.support:appcompat-v7:28.0.0] /home/kral_chleba/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/b2755f210b37499a1950078032f1d110/AndroidManifest.xml:17:1-22:12
-MERGED from [com.google.android.gms:play-services-auth:16.0.1] /home/kral_chleba/.gradle/caches/transforms-1/files-1.1/play-services-auth-16.0.1.aar/e042108b3a4d563c144d9882dfb618fd/AndroidManifest.xml:17:1-39:12
 MERGED from [com.google.android.gms:play-services-maps:16.1.0] /home/kral_chleba/.gradle/caches/transforms-1/files-1.1/play-services-maps-16.1.0.aar/391ea8b203066f06a464bca3105bc5db/AndroidManifest.xml:17:1-38:12
+MERGED from [com.google.android.gms:play-services-auth:16.0.1] /home/kral_chleba/.gradle/caches/transforms-1/files-1.1/play-services-auth-16.0.1.aar/e042108b3a4d563c144d9882dfb618fd/AndroidManifest.xml:17:1-39:12
 MERGED from [com.google.android.gms:play-services-auth-api-phone:16.0.0] /home/kral_chleba/.gradle/caches/transforms-1/files-1.1/play-services-auth-api-phone-16.0.0.aar/f3961e019633af6a127003c0909cb01d/AndroidManifest.xml:2:1-7:12
 MERGED from [com.google.android.gms:play-services-auth-base:16.0.0] /home/kral_chleba/.gradle/caches/transforms-1/files-1.1/play-services-auth-base-16.0.0.aar/e178c8bdb67a1a87143de2c57e6df6f9/AndroidManifest.xml:2:1-7:12
 MERGED from [com.google.android.gms:play-services-base:16.1.0] /home/kral_chleba/.gradle/caches/transforms-1/files-1.1/play-services-base-16.1.0.aar/57246258d7bf17471eeb933ea0150f57/AndroidManifest.xml:17:1-29:12
@@ -96,10 +96,10 @@ MERGED from /home/kral_chleba/Desktop/NewcomersMap-RN/android/app/src/main/Andro
 MERGED from /home/kral_chleba/Desktop/NewcomersMap-RN/android/app/src/main/AndroidManifest.xml:8:5-29:19
 MERGED from [com.facebook.react:react-native:0.59.5] /home/kral_chleba/.gradle/caches/transforms-1/files-1.1/react-native-0.59.5.aar/0e32a780373ecfa7eea36b4754cce6d1/AndroidManifest.xml:11:5-20
 MERGED from [com.facebook.react:react-native:0.59.5] /home/kral_chleba/.gradle/caches/transforms-1/files-1.1/react-native-0.59.5.aar/0e32a780373ecfa7eea36b4754cce6d1/AndroidManifest.xml:11:5-20
-MERGED from [com.google.android.gms:play-services-auth:16.0.1] /home/kral_chleba/.gradle/caches/transforms-1/files-1.1/play-services-auth-16.0.1.aar/e042108b3a4d563c144d9882dfb618fd/AndroidManifest.xml:22:5-37:19
-MERGED from [com.google.android.gms:play-services-auth:16.0.1] /home/kral_chleba/.gradle/caches/transforms-1/files-1.1/play-services-auth-16.0.1.aar/e042108b3a4d563c144d9882dfb618fd/AndroidManifest.xml:22:5-37:19
 MERGED from [com.google.android.gms:play-services-maps:16.1.0] /home/kral_chleba/.gradle/caches/transforms-1/files-1.1/play-services-maps-16.1.0.aar/391ea8b203066f06a464bca3105bc5db/AndroidManifest.xml:30:5-36:19
 MERGED from [com.google.android.gms:play-services-maps:16.1.0] /home/kral_chleba/.gradle/caches/transforms-1/files-1.1/play-services-maps-16.1.0.aar/391ea8b203066f06a464bca3105bc5db/AndroidManifest.xml:30:5-36:19
+MERGED from [com.google.android.gms:play-services-auth:16.0.1] /home/kral_chleba/.gradle/caches/transforms-1/files-1.1/play-services-auth-16.0.1.aar/e042108b3a4d563c144d9882dfb618fd/AndroidManifest.xml:22:5-37:19
+MERGED from [com.google.android.gms:play-services-auth:16.0.1] /home/kral_chleba/.gradle/caches/transforms-1/files-1.1/play-services-auth-16.0.1.aar/e042108b3a4d563c144d9882dfb618fd/AndroidManifest.xml:22:5-37:19
 MERGED from [com.google.android.gms:play-services-base:16.1.0] /home/kral_chleba/.gradle/caches/transforms-1/files-1.1/play-services-base-16.1.0.aar/57246258d7bf17471eeb933ea0150f57/AndroidManifest.xml:22:5-27:19
 MERGED from [com.google.android.gms:play-services-base:16.1.0] /home/kral_chleba/.gradle/caches/transforms-1/files-1.1/play-services-base-16.1.0.aar/57246258d7bf17471eeb933ea0150f57/AndroidManifest.xml:22:5-27:19
 MERGED from [com.google.maps.android:android-maps-utils:0.5] /home/kral_chleba/.gradle/caches/transforms-1/files-1.1/android-maps-utils-0.5.aar/f841d65fad1347ecaaa01e29f1d92a70/AndroidManifest.xml:7:5-11:19
@@ -188,10 +188,10 @@ MERGED from [com.facebook.react:react-native:0.59.5] /home/kral_chleba/.gradle/c
 MERGED from [com.facebook.react:react-native:0.59.5] /home/kral_chleba/.gradle/caches/transforms-1/files-1.1/react-native-0.59.5.aar/0e32a780373ecfa7eea36b4754cce6d1/AndroidManifest.xml:7:5-9:41
 MERGED from [com.android.support:appcompat-v7:28.0.0] /home/kral_chleba/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/b2755f210b37499a1950078032f1d110/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:appcompat-v7:28.0.0] /home/kral_chleba/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/b2755f210b37499a1950078032f1d110/AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-auth:16.0.1] /home/kral_chleba/.gradle/caches/transforms-1/files-1.1/play-services-auth-16.0.1.aar/e042108b3a4d563c144d9882dfb618fd/AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-auth:16.0.1] /home/kral_chleba/.gradle/caches/transforms-1/files-1.1/play-services-auth-16.0.1.aar/e042108b3a4d563c144d9882dfb618fd/AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-maps:16.1.0] /home/kral_chleba/.gradle/caches/transforms-1/files-1.1/play-services-maps-16.1.0.aar/391ea8b203066f06a464bca3105bc5db/AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-maps:16.1.0] /home/kral_chleba/.gradle/caches/transforms-1/files-1.1/play-services-maps-16.1.0.aar/391ea8b203066f06a464bca3105bc5db/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-auth:16.0.1] /home/kral_chleba/.gradle/caches/transforms-1/files-1.1/play-services-auth-16.0.1.aar/e042108b3a4d563c144d9882dfb618fd/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-auth:16.0.1] /home/kral_chleba/.gradle/caches/transforms-1/files-1.1/play-services-auth-16.0.1.aar/e042108b3a4d563c144d9882dfb618fd/AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-auth-api-phone:16.0.0] /home/kral_chleba/.gradle/caches/transforms-1/files-1.1/play-services-auth-api-phone-16.0.0.aar/f3961e019633af6a127003c0909cb01d/AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.gms:play-services-auth-api-phone:16.0.0] /home/kral_chleba/.gradle/caches/transforms-1/files-1.1/play-services-auth-api-phone-16.0.0.aar/f3961e019633af6a127003c0909cb01d/AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.gms:play-services-auth-base:16.0.0] /home/kral_chleba/.gradle/caches/transforms-1/files-1.1/play-services-auth-base-16.0.0.aar/e178c8bdb67a1a87143de2c57e6df6f9/AndroidManifest.xml:5:5-44
@@ -286,6 +286,22 @@ uses-permission#android.permission.SYSTEM_ALERT_WINDOW
 ADDED from /home/kral_chleba/Desktop/NewcomersMap-RN/android/app/src/debug/AndroidManifest.xml:5:5-77
 	android:name
 		ADDED from /home/kral_chleba/Desktop/NewcomersMap-RN/android/app/src/debug/AndroidManifest.xml:5:22-75
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from [com.google.android.gms:play-services-maps:16.1.0] /home/kral_chleba/.gradle/caches/transforms-1/files-1.1/play-services-maps-16.1.0.aar/391ea8b203066f06a464bca3105bc5db/AndroidManifest.xml:23:5-79
+	android:name
+		ADDED from [com.google.android.gms:play-services-maps:16.1.0] /home/kral_chleba/.gradle/caches/transforms-1/files-1.1/play-services-maps-16.1.0.aar/391ea8b203066f06a464bca3105bc5db/AndroidManifest.xml:23:22-76
+uses-feature#0x00020000
+ADDED from [com.google.android.gms:play-services-maps:16.1.0] /home/kral_chleba/.gradle/caches/transforms-1/files-1.1/play-services-maps-16.1.0.aar/391ea8b203066f06a464bca3105bc5db/AndroidManifest.xml:26:5-28:35
+	android:glEsVersion
+		ADDED from [com.google.android.gms:play-services-maps:16.1.0] /home/kral_chleba/.gradle/caches/transforms-1/files-1.1/play-services-maps-16.1.0.aar/391ea8b203066f06a464bca3105bc5db/AndroidManifest.xml:27:9-41
+	android:required
+		ADDED from [com.google.android.gms:play-services-maps:16.1.0] /home/kral_chleba/.gradle/caches/transforms-1/files-1.1/play-services-maps-16.1.0.aar/391ea8b203066f06a464bca3105bc5db/AndroidManifest.xml:28:9-32
+uses-library#org.apache.http.legacy
+ADDED from [com.google.android.gms:play-services-maps:16.1.0] /home/kral_chleba/.gradle/caches/transforms-1/files-1.1/play-services-maps-16.1.0.aar/391ea8b203066f06a464bca3105bc5db/AndroidManifest.xml:33:9-35:40
+	android:required
+		ADDED from [com.google.android.gms:play-services-maps:16.1.0] /home/kral_chleba/.gradle/caches/transforms-1/files-1.1/play-services-maps-16.1.0.aar/391ea8b203066f06a464bca3105bc5db/AndroidManifest.xml:35:13-37
+	android:name
+		ADDED from [com.google.android.gms:play-services-maps:16.1.0] /home/kral_chleba/.gradle/caches/transforms-1/files-1.1/play-services-maps-16.1.0.aar/391ea8b203066f06a464bca3105bc5db/AndroidManifest.xml:34:13-50
 activity#com.google.android.gms.auth.api.signin.internal.SignInHubActivity
 ADDED from [com.google.android.gms:play-services-auth:16.0.1] /home/kral_chleba/.gradle/caches/transforms-1/files-1.1/play-services-auth-16.0.1.aar/e042108b3a4d563c144d9882dfb618fd/AndroidManifest.xml:23:9-27:75
 	android:excludeFromRecents
@@ -304,22 +320,6 @@ ADDED from [com.google.android.gms:play-services-auth:16.0.1] /home/kral_chleba/
 		ADDED from [com.google.android.gms:play-services-auth:16.0.1] /home/kral_chleba/.gradle/caches/transforms-1/files-1.1/play-services-auth-16.0.1.aar/e042108b3a4d563c144d9882dfb618fd/AndroidManifest.xml:36:13-107
 	android:name
 		ADDED from [com.google.android.gms:play-services-auth:16.0.1] /home/kral_chleba/.gradle/caches/transforms-1/files-1.1/play-services-auth-16.0.1.aar/e042108b3a4d563c144d9882dfb618fd/AndroidManifest.xml:34:13-89
-uses-permission#android.permission.ACCESS_NETWORK_STATE
-ADDED from [com.google.android.gms:play-services-maps:16.1.0] /home/kral_chleba/.gradle/caches/transforms-1/files-1.1/play-services-maps-16.1.0.aar/391ea8b203066f06a464bca3105bc5db/AndroidManifest.xml:23:5-79
-	android:name
-		ADDED from [com.google.android.gms:play-services-maps:16.1.0] /home/kral_chleba/.gradle/caches/transforms-1/files-1.1/play-services-maps-16.1.0.aar/391ea8b203066f06a464bca3105bc5db/AndroidManifest.xml:23:22-76
-uses-feature#0x00020000
-ADDED from [com.google.android.gms:play-services-maps:16.1.0] /home/kral_chleba/.gradle/caches/transforms-1/files-1.1/play-services-maps-16.1.0.aar/391ea8b203066f06a464bca3105bc5db/AndroidManifest.xml:26:5-28:35
-	android:glEsVersion
-		ADDED from [com.google.android.gms:play-services-maps:16.1.0] /home/kral_chleba/.gradle/caches/transforms-1/files-1.1/play-services-maps-16.1.0.aar/391ea8b203066f06a464bca3105bc5db/AndroidManifest.xml:27:9-41
-	android:required
-		ADDED from [com.google.android.gms:play-services-maps:16.1.0] /home/kral_chleba/.gradle/caches/transforms-1/files-1.1/play-services-maps-16.1.0.aar/391ea8b203066f06a464bca3105bc5db/AndroidManifest.xml:28:9-32
-uses-library#org.apache.http.legacy
-ADDED from [com.google.android.gms:play-services-maps:16.1.0] /home/kral_chleba/.gradle/caches/transforms-1/files-1.1/play-services-maps-16.1.0.aar/391ea8b203066f06a464bca3105bc5db/AndroidManifest.xml:33:9-35:40
-	android:required
-		ADDED from [com.google.android.gms:play-services-maps:16.1.0] /home/kral_chleba/.gradle/caches/transforms-1/files-1.1/play-services-maps-16.1.0.aar/391ea8b203066f06a464bca3105bc5db/AndroidManifest.xml:35:13-37
-	android:name
-		ADDED from [com.google.android.gms:play-services-maps:16.1.0] /home/kral_chleba/.gradle/caches/transforms-1/files-1.1/play-services-maps-16.1.0.aar/391ea8b203066f06a464bca3105bc5db/AndroidManifest.xml:34:13-50
 activity#com.google.android.gms.common.api.GoogleApiActivity
 ADDED from [com.google.android.gms:play-services-base:16.1.0] /home/kral_chleba/.gradle/caches/transforms-1/files-1.1/play-services-base-16.1.0.aar/57246258d7bf17471eeb933ea0150f57/AndroidManifest.xml:23:9-26:75
 	android:exported

@@ -61,9 +61,9 @@ export default class Home extends React.Component {
     async _getCurrentUser() {
         const user = await GoogleSignin.getCurrentUser()
             .catch((err) => console.warn(err));
-        if (user !== null && user !== undefined)  {
+        if (user !== null && user !== undefined) {
             await GoogleSignin.getTokens()
-                .then((token) => setTimeout(() => this._navigateToDataList(token), 1500)                )
+                .then((token) => setTimeout(() => this._navigateToDataList(token), 1500))
                 .catch((err) => console.warn(err));
         } else setTimeout(() => this.setState({ needsSignIn: true }), 1500);
     }
@@ -83,7 +83,7 @@ export default class Home extends React.Component {
             else {
                 this.setState({ isSigningInProgress: false });
                 console.log("_signIn(): !!!");
-            } 
+            }
         } catch (err) {
             console.warn(err);
             if (err.code === statusCodes.SIGN_IN_CANCELLED) {
@@ -91,33 +91,30 @@ export default class Home extends React.Component {
                 ToastAndroid.show("Authentication required", ToastAndroid.SHORT);
             }
         }
-        
+
     }
 
     async _requestLocationPermission() {
-        try {
-            await PermissionsAndroid.requestMultiple([
-                PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-                PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION
-            ]).then((result) => {
-                // Nope, you cannot iterate through the result
-                if (result[PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION]
-                    && result[PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION]
-                    === PermissionsAndroid.RESULTS.GRANTED) {
-                    this.setState({ locationPermission: true });
-                }
-                else if (result[PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION]
-                    || result[PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION]
-                    === PermissionsAndroid.RESULT) {
-                    /* this.props.navigation.navigate('ErrorScreen', {
-                        message: "Location permission is needed.",
-                    }); */
-                    ToastAndroid.show("Location permission is needed", ToastAndroid.SHORT)
-                }
-            });
-        } catch (err) {
-            console.warn(err);
-        }
+        const permissions = [
+            PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+            PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION
+        ];
+        await PermissionsAndroid.requestMultiple(permissions)
+            .then((result) => {
+                Object.values(result).forEach((val) => {
+                    if(val !== PermissionsAndroid.RESULTS.GRANTED) {
+                        this.props.navigation.dispatch(StackActions.reset({
+                            index: 0,
+                            actions: [NavigationActions.navigate({
+                                routeName: 'ErrorScreen',
+                                params: { errorCode: 'permissionError' }
+                            })],
+                        }));
+                        return;
+                    }
+                });
+            })
+            .catch((err) => console.log(err));
     }
 
     _navigateToDataList(user) {

@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Tue May 07 13:32:32 BST 2019
+#Thu May 16 11:05:28 BST 2019
 5.base=/home/kral_chleba/Desktop/NewcomersMap-RN/android/app/build/intermediates/transforms/mergeJniLibs/debug/0
 42.base=/home/kral_chleba/Desktop/NewcomersMap-RN/android/app/build/intermediates/transforms/mergeJniLibs/debug/0
 22.path=lib/x86_64/libyoga.so

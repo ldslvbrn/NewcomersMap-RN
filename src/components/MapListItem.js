@@ -12,34 +12,34 @@ export default class MapListItem extends PureComponent {
         return (
             <TouchableOpacity onPress={this._onPress}>
                 <View style={styles.container}>
-                <View style={{ justifyContent: 'center', alignItems: 'center', marginBottom: 5 }}>
-                    <Text style={styles.labelTitle}>Title:</Text>
-                    <Text style={styles.title} numberOfLines={1}>{this.props.title}</Text>
-                </View>
-                <View style={{ flexDirection: 'row' }}>
-                    <View style={{ flex: 6, alignItems: 'flex-start' }}>
-                        <Text style={styles.labelLocation}>Location:</Text>
-                        <Text style={styles.location} numberOfLines={1}>
-                            {this.props.location}
-                        </Text>
+                    <View style={{ justifyContent: 'center', alignItems: 'center', marginBottom: 5 }}>
+                        <Text style={styles.labelTitle}>Title:</Text>
+                        <Text style={styles.title} numberOfLines={1}>{this.props.title}</Text>
                     </View>
-                    <View style={{
-                        flex: 1,
-                        alignSelf: 'flex-end',
-                        alignItems: 'flex-start',
-                        paddingRight: 5,
-                        padddingLeft: 5,
-                    }}>
-                        <Text style={styles.labelMarkers}>Markers:</Text>
-                        <Text style={styles.markers}>{this.props.totalMarkers}</Text>
+                    <View style={{ flexDirection: 'row' }}>
+                        <View style={{ flex: 6, alignItems: 'flex-start' }}>
+                            <Text style={styles.labelLocation}>Location:</Text>
+                            <Text style={styles.location} numberOfLines={1}>
+                                {this.props.location}
+                            </Text>
+                        </View>
+                        <View style={{
+                            flex: 1,
+                            alignSelf: 'flex-end',
+                            alignItems: 'flex-start',
+                            paddingRight: 5,
+                            padddingLeft: 5,
+                        }}>
+                            <Text style={styles.labelMarkers}>Markers:</Text>
+                            <Text style={styles.markers}>{this.props.totalMarkers}</Text>
+                        </View>
                     </View>
                 </View>
-            </View>
             </TouchableOpacity>
         );
     }
 
-    _onPress() { this.props.onPress(this.props.id); }
+    _onPress = () => this.props.onPress(this.props.id);
 }
 
 const styles = StyleSheet.create({

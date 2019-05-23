@@ -8,12 +8,57 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:323664508081:android:a95d709987b1a7d3",
+        "android_client_info": {
+          "package_name": "uk.ac.tees.java.newcomersmap"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "323664508081-nocp7jd6vu1pcgvfqj3a4pupk9o9tppe.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "uk.ac.tees.java.newcomersmap",
+            "certificate_hash": "f0dc700a04eed0cfd495286b96ad8ad36fa00a48"
+          }
+        },
+        {
+          "client_id": "323664508081-1vu22670ieg6lve35f5fjab6aflsqvpp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD0p7kot4EGQq497UOrmtVJnR0fnM1821E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "323664508081-1vu22670ieg6lve35f5fjab6aflsqvpp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:323664508081:android:ead2d7699db81319",
         "android_client_info": {
           "package_name": "uk.ac.tees.reactnative.newcomersmap"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "323664508081-6iecbm7uaqp972d5s1fhcj4c126d0vf7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "uk.ac.tees.reactnative.newcomersmap",
+            "certificate_hash": "c76f2bd28a8a02170fb9c6cf6a6ad3f91f52763a"
+          }
+        },
         {
           "client_id": "323664508081-9phiqj3bn85me6v0dj9m5s6t5i94g3ua.apps.googleusercontent.com",
           "client_type": 1,
