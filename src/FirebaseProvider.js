@@ -64,7 +64,7 @@ export default class FirebaseProvider {
     }
 
     async addUserMap(map, callback) {
-        map.location = map.markers[0].location;
+        map.location = map.points[0].location;
         await this._db.collection(_usersDbCollection)
             .doc(this._user.user.uid)
             .collection(_userMapsDbCollection)

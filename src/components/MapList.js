@@ -7,7 +7,7 @@ import {
     ActivityIndicator,
     Text
 } from 'react-native';
-import MapListItem from "./MapListItem";
+import UserListItem from "./UserMapListItem";
 import * as theme from '../assets/themes/default.json';
 import FirebaseProvider from "../FirebaseProvider";
 import * as Geocoder from "../GeocoderProvider";
@@ -15,9 +15,9 @@ import * as Geocoder from "../GeocoderProvider";
 export default class MapList extends Component {
     constructor(props) {
         super(props);
-        this._renderItem = this._renderItem.bind(this);
+        this.renderItem = this.renderItem.bind(this);
         this._addItem = this._addItem.bind(this);
-        this._renderListConditionaly = this._renderListConditionaly.bind(this);
+        this.renderListConditionaly = this.renderListConditionaly.bind(this);
         this._onPressItem = this._onPressItem.bind(this);
         this._onNavigateBack = this._onNavigateBack.bind(this);
         this._getAllMaps = this._getAllMaps.bind(this);
@@ -37,17 +37,17 @@ export default class MapList extends Component {
     }
 
     render() {
-        return (this._renderListConditionaly());
+        return (this.renderListConditionaly());
     }
 
-    _renderListConditionaly() {
+    renderListConditionaly() {
         if (this.state.dataReady) {
             return (
                 <View style={styles.container}>
                     <FlatList
                         style={{ flex: 1, width: '100%' }}
                         data={this.state.userMaps}
-                        renderItem={this._renderItem}
+                        renderItem={this.renderItem}
                         keyExtractor={(item, index) => item.documentId}
                         on
                     />
@@ -62,24 +62,25 @@ export default class MapList extends Component {
                     </TouchableOpacity>
                 </View>
             );
+        // Show loading
         } else {
             return (
                 <View style={styles.container}>
-                    <Text>Loading your maps. . .</Text>
+                    <Text style={{ marginBottom: 10 }} >Loading your maps. . .</Text>
                     <ActivityIndicator size={80} color={theme.color.light} />
                 </View>
             );
         }
     }
 
-    _renderItem({ item }) {
-        const totalMarkers = item.markers.length;
+    renderItem({ item }) {
+        const totalPoints = item.points.length;
         const locationIndex = this.state.userMaps.indexOf(item);
         return (
-            <MapListItem
+            <UserListItem
                 id={item.documentId}
                 title={item.title}
-                totalMarkers={totalMarkers}
+                totalPoints={totalPoints}
                 location={this.state.shownLocation[locationIndex]}
                 onPress={this._onPressItem}
             />
